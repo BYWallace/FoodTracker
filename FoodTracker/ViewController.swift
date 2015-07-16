@@ -15,6 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var suggestedSearchFoods:[String] = []
     var filteredSuggestedSearchFoods:[String] = []
+    
+    var scopeButtonTitles = ["Recommended", "Search Results", "Saved"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0)
         self.tableView.tableHeaderView = self.searchController.searchBar
+        self.searchController.searchBar.scopeButtonTitles = scopeButtonTitles
         
         self.searchController.searchBar.delegate = self
         self.definesPresentationContext = true
