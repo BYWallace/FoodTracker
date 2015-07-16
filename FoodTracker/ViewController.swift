@@ -42,11 +42,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Mark - UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        
+        if self.searchController.active {
+            return self.filteredSuggestedSearchFoods.count
+        }
+        else {
+            return self.suggestedSearchFoods.count
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        var foodName:String
+        
+        if self.searchController.active {
+            foodName = filteredSuggestedSearchFoods[indexPath.row]
+        }
+        else {
+            foodName = suggestedSearchFoods[indexPath.row]
+        }
+        
+        cell.textLabel?.text = foodName
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
+        return cell
     }
     
     // Mark - UISearchResultsUpdating
