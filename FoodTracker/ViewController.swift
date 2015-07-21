@@ -99,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func makeRequest(searchString: String) {
-        // How to make a HTTP GET Request
+//         How to make a HTTP GET Request
 //        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(searchString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=\(kAppId)&appKey=\(kAppKey)")
 //        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
 //            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -109,6 +109,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        })
 //        
 //        task.resume()
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://api.nutritionix.com/v1_1/search")!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        // Request doesn't work if trying to use app key and ID in constant. Must be issue with serialization/conversion to JSON
+        var params = [
+            "appId" : "6c9ebfe6",
+            "appKey" : "50cc2eefcd1606809b0c095ce0eeae6a",
+            "fields" : ["item_name", "brand_name", "keywords", "usda_fields"],
+            "limit"  : "50",
+            "query"  : searchString,
+            "filters": ["exists":["usda_fields": true]]
+        ]
+        
+        var error: NSError?
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
+            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println(stringData)
+            var conversionError: NSError?
+            var jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves, error: &conversionError) as? NSDictionary
+            println(jsonDictionary)
+        })
+        task.resume()
     }
 
 }
