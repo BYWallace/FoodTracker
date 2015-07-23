@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE5827B01B6195A600DEA490 /* USDAItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5827AF1B6195A600DEA490 /* USDAItem.swift */; };
 		FE5BB6D21B55ABAA000BA84F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BB6D11B55ABAA000BA84F /* AppDelegate.swift */; };
 		FE5BB6D51B55ABAA000BA84F /* FoodTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE5BB6D31B55ABAA000BA84F /* FoodTracker.xcdatamodeld */; };
 		FE5BB6D71B55ABAA000BA84F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BB6D61B55ABAA000BA84F /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE5827AF1B6195A600DEA490 /* USDAItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = USDAItem.swift; path = ../USDAItem.swift; sourceTree = "<group>"; };
 		FE5BB6CC1B55ABAA000BA84F /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5BB6D01B55ABAA000BA84F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE5BB6D11B55ABAA000BA84F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				FE5BB6DB1B55ABAA000BA84F /* Images.xcassets */,
 				FE5BB6DD1B55ABAA000BA84F /* LaunchScreen.xib */,
 				FE5BB6D31B55ABAA000BA84F /* FoodTracker.xcdatamodeld */,
+				FE5827AF1B6195A600DEA490 /* USDAItem.swift */,
 				FE5BB6CF1B55ABAA000BA84F /* Supporting Files */,
 			);
 			path = FoodTracker;
@@ -224,6 +227,7 @@
 				FE69B1CC1B6081DF0001154B /* DataController.swift in Sources */,
 				FE5BB6D71B55ABAA000BA84F /* ViewController.swift in Sources */,
 				FE5BB6D51B55ABAA000BA84F /* FoodTracker.xcdatamodeld in Sources */,
+				FE5827B01B6195A600DEA490 /* USDAItem.swift in Sources */,
 				FE5BB6D21B55ABAA000BA84F /* AppDelegate.swift in Sources */,
 				FE5BB6F51B55AD20000BA84F /* DetailViewController.swift in Sources */,
 			);
