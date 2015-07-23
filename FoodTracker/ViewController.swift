@@ -53,23 +53,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.searchController.active {
-            return self.filteredSuggestedSearchFoods.count
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        
+        if selectedScopeButtonIndex == 0 {
+            if self.searchController.active {
+                return self.filteredSuggestedSearchFoods.count
+            }
+            else {
+                return self.suggestedSearchFoods.count
+            }
+        }
+        else if selectedScopeButtonIndex == 1 {
+            return self.apiSearchForFoods.count
         }
         else {
-            return self.suggestedSearchFoods.count
+            return 0
         }
+        
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
         var foodName:String
         
-        if self.searchController.active {
-            foodName = filteredSuggestedSearchFoods[indexPath.row]
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        
+        if selectedScopeButtonIndex == 0 {
+            if self.searchController.active {
+                foodName = filteredSuggestedSearchFoods[indexPath.row]
+            }
+            else {
+                foodName = suggestedSearchFoods[indexPath.row]
+            }
+        }
+        else if selectedScopeButtonIndex == 1 {
+            foodName = apiSearchForFoods[indexPath.row].name
         }
         else {
-            foodName = suggestedSearchFoods[indexPath.row]
+            foodName = ""
         }
         
         cell.textLabel?.text = foodName
@@ -99,6 +120,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - UISearchBarDelegate
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.searchController.searchBar.selectedScopeButtonIndex = 1
         makeRequest(searchBar.text)
     }
     
@@ -148,6 +170,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if jsonDictionary != nil {
                     self.jsonResponse = jsonDictionary!
                     self.apiSearchForFoods = DataController.jsonAsUSDAIdAndNameSearchResults(jsonDictionary!)
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.tableView.reloadData()
+                    })
                 }
                 else {
                     let errorString = NSString(data: data, encoding: NSUTF8StringEncoding)
