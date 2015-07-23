@@ -149,6 +149,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         makeRequest(searchBar.text)
     }
     
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        self.tableView.reloadData()
+    }
+    
     func makeRequest(searchString: String) {
 //         How to make a HTTP GET Request
 //        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(searchString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=\(kAppId)&appKey=\(kAppKey)")
