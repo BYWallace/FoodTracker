@@ -54,6 +54,7 @@ class DataController {
                     
                     if items?.count != 0 {
                         // The item is already saved
+                        println("The item was already saved!")
                         return
                     }
                     else {
@@ -120,7 +121,7 @@ class DataController {
                                 }
                                 
                                 if usdaFieldsDictionary["PROCNT"] != nil {
-                                    let proteinDictionary = usdaFieldsDictionary["PRONCT"]! as! NSDictionary
+                                    let proteinDictionary = usdaFieldsDictionary["PROCNT"]! as! NSDictionary
                                     
                                     if proteinDictionary["value"] != nil {
                                         let proteinValue: AnyObject = proteinDictionary["value"]!
@@ -166,6 +167,8 @@ class DataController {
                                         usdaItem.energy = "0"
                                     }
                                 }
+                                
+                                (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
                             }
                         }
                     }
