@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     @IBOutlet weak var tableView: UITableView!
@@ -26,6 +27,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var jsonResponse:NSDictionary!
     
     var dataController = DataController()
+    
+    var favoritedUSDAItems:[USDAItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return self.apiSearchForFoods.count
         }
         else {
-            return 0
+            return self.favoritedUSDAItems.count
         }
         
     }
@@ -92,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             foodName = apiSearchForFoods[indexPath.row].name
         }
         else {
-            foodName = ""
+            foodName = self.favoritedUSDAItems[indexPath.row].name
         }
         
         cell.textLabel?.text = foodName
@@ -153,6 +156,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        if selectedScope == 2 {
+            requestFavoritedUSDAItems()
+        }
+        
         self.tableView.reloadData()
     }
     
@@ -214,6 +222,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         })
         task.resume()
+    }
+    
+    // MARK: - Setup CoreData
+    
+    func requestFavoritedUSDAItems() {
+        let fetchRequest = NSFetchRequest(entityName: "USDAItem")
+        let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        let managedObjectContext = appDelegate.managedObjectContext
+        self.favoritedUSDAItems = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [USDAItem]
     }
 
 }
