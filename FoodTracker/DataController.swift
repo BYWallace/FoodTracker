@@ -98,8 +98,8 @@ class DataController {
                                     usdaItem.carbohydrate = "0"
                                 }
                                 
-                                if usdaFieldsDictionary["Fat"] != nil {
-                                    let fatTotalDictionary = usdaFieldsDictionary["Fat"]! as! NSDictionary
+                                if usdaFieldsDictionary["FAT"] != nil {
+                                    let fatTotalDictionary = usdaFieldsDictionary["FAT"]! as! NSDictionary
                                     
                                     if fatTotalDictionary["value"] != nil {
                                         let fatValue: AnyObject = fatTotalDictionary["value"]!

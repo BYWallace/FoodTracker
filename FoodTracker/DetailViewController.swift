@@ -107,10 +107,10 @@ class DetailViewController: UIViewController {
         itemAttributedString.appendAttributedString(energyTitleString)
         itemAttributedString.appendAttributedString(energyBodyString)
         
-//        let fatTotalTitleString = NSAttributedString(string: "Fat Total ", attributes: styleFirstWordAttributesDictionary)
-//        let fatTotalBodyString = NSAttributedString(string: "\(usdaItem.fatTotal)% \n", attributes: style1AttributesDictionary)
-//        itemAttributedString.appendAttributedString(fatTotalTitleString)
-//        itemAttributedString.appendAttributedString(fatTotalBodyString)
+        let fatTotalTitleString = NSAttributedString(string: "Fat Total ", attributes: styleFirstWordAttributesDictionary)
+        let fatTotalBodyString = NSAttributedString(string: "\(usdaItem.fatTotal)% \n", attributes: style1AttributesDictionary)
+        itemAttributedString.appendAttributedString(fatTotalTitleString)
+        itemAttributedString.appendAttributedString(fatTotalBodyString)
         
         let proteinTitleString = NSAttributedString(string: "Protein ", attributes: styleFirstWordAttributesDictionary)
         let proteinBodyString = NSAttributedString(string: "\(usdaItem.protein)% \n", attributes: style2AttributesDictionary)
@@ -122,7 +122,7 @@ class DetailViewController: UIViewController {
         itemAttributedString.appendAttributedString(sugarTitleString)
         itemAttributedString.appendAttributedString(sugarBodyString)
         
-        let vitaminCTitleString = NSAttributedString(string: "Vitamin C", attributes: styleFirstWordAttributesDictionary)
+        let vitaminCTitleString = NSAttributedString(string: "Vitamin C ", attributes: styleFirstWordAttributesDictionary)
         let vitaminCBodyString = NSAttributedString(string: "\(usdaItem.vitaminC)% \n", attributes: style2AttributesDictionary)
         itemAttributedString.appendAttributedString(vitaminCTitleString)
         itemAttributedString.appendAttributedString(vitaminCBodyString)
