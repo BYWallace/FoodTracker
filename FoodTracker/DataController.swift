@@ -151,7 +151,7 @@ class DataController {
                                     
                                     if vitaminCDictionary["value"] != nil {
                                         let vitaminCValue: AnyObject = vitaminCDictionary["value"]!
-                                        usdaItem.vitaminC = "\(vitaminCDictionary)"
+                                        usdaItem.vitaminC = "\(vitaminCValue)"
                                     }
                                     else {
                                         usdaItem.vitaminC = "0"
