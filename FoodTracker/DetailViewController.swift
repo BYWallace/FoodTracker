@@ -21,8 +21,11 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+
+        if usdaItem != nil {
+            textView.attributedText = createAttributedString(usdaItem!)
+        }
     }
     
     deinit {
@@ -38,8 +41,30 @@ class DetailViewController: UIViewController {
         
         println("usdaItemDidComplete in DetailViewController")
         usdaItem = notification.object as? USDAItem
+        
+        if self.isViewLoaded() && self.view.window != nil {
+            textView.attributedText = createAttributedString(usdaItem!)
+        }
     }
     
     @IBAction func eatItBarButtonItemPressed(sender: UIBarButtonItem) {
+    }
+    
+    func createAttributedString(usdaItem: USDAItem!) -> NSAttributedString {
+        var itemAttributedString = NSMutableAttributedString()
+        var centeredParagraphStyle = NSMutableParagraphStyle()
+        centeredParagraphStyle.alignment = NSTextAlignment.Center
+        centeredParagraphStyle.lineSpacing = 10.0
+        
+        var titleAttributesDictionary = [
+            NSForegroundColorAttributeName: UIColor.blackColor(),
+            NSFontAttributeName: UIFont.boldSystemFontOfSize(22.0),
+            NSParagraphStyleAttributeName: centeredParagraphStyle
+        ]
+        
+        let titleString = NSAttributedString(string: "\(usdaItem.name)\n", attributes: titleAttributesDictionary)
+        itemAttributedString.appendAttributedString(titleString)
+        
+        return itemAttributedString
     }
 }
