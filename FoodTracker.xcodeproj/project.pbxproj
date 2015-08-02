@@ -17,6 +17,7 @@
 		FE5BB6EB1B55ABAA000BA84F /* FoodTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BB6EA1B55ABAA000BA84F /* FoodTrackerTests.swift */; };
 		FE5BB6F51B55AD20000BA84F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BB6F41B55AD20000BA84F /* DetailViewController.swift */; };
 		FE69B1CC1B6081DF0001154B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE69B1CB1B6081DF0001154B /* DataController.swift */; };
+		FED350831B6DC27A00F126C0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FED350821B6DC27A00F126C0 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		FE5BB6EA1B55ABAA000BA84F /* FoodTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerTests.swift; sourceTree = "<group>"; };
 		FE5BB6F41B55AD20000BA84F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FE69B1CB1B6081DF0001154B /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		FED350821B6DC27A00F126C0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		FED350841B6DC27A00F126C0 /* FoodTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FoodTracker.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED350831B6DC27A00F126C0 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +71,7 @@
 		FE5BB6C31B55ABAA000BA84F = {
 			isa = PBXGroup;
 			children = (
+				FED350821B6DC27A00F126C0 /* HealthKit.framework */,
 				FE5BB6CE1B55ABAA000BA84F /* FoodTracker */,
 				FE5BB6E71B55ABAA000BA84F /* FoodTrackerTests */,
 				FE5BB6CD1B55ABAA000BA84F /* Products */,
@@ -85,6 +90,7 @@
 		FE5BB6CE1B55ABAA000BA84F /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
+				FED350841B6DC27A00F126C0 /* FoodTracker.entitlements */,
 				FE5BB6D11B55ABAA000BA84F /* AppDelegate.swift */,
 				FE5BB6D61B55ABAA000BA84F /* ViewController.swift */,
 				FE69B1CB1B6081DF0001154B /* DataController.swift */,
@@ -173,6 +179,12 @@
 				TargetAttributes = {
 					FE5BB6CB1B55ABAA000BA84F = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 5588544B43;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					FE5BB6E31B55ABAA000BA84F = {
 						CreatedOnToolsVersion = 6.4;
@@ -358,9 +370,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FoodTracker/FoodTracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -368,9 +384,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FoodTracker/FoodTracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
