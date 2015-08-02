@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HealthKit
 
 class DetailViewController: UIViewController {
     var usdaItem:USDAItem?
@@ -22,6 +23,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestAuthorizationForHealthStore()
 
         if usdaItem != nil {
             textView.attributedText = createAttributedString(usdaItem!)
@@ -128,5 +130,40 @@ class DetailViewController: UIViewController {
         itemAttributedString.appendAttributedString(vitaminCBodyString)
         
         return itemAttributedString
+    }
+    
+    func requestAuthorizationForHealthStore() {
+        let dataTypestoWrite = [
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCalcium),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCholesterol),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryEnergyConsumed),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryFatTotal),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryProtein),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietarySugar),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryVitaminC)
+        ]
+        
+        let dataTypestoRead = [
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCalcium),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCholesterol),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryEnergyConsumed),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryFatTotal),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryProtein),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietarySugar),
+            HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryVitaminC)
+        ]
+        
+        var store: HealthStoreConstant = HealthStoreConstant()
+        store.healthStore?.requestAuthorizationToShareTypes(NSSet(array: dataTypestoWrite) as Set<NSObject>, readTypes: NSSet(array: dataTypestoRead) as Set<NSObject>, completion: { (success, error) -> Void in
+            
+            if success {
+                println("User completed authorization request")
+            }
+            else {
+                println("User canceled the request \(error)")
+            }
+        })
     }
 }
